@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+<style>
+    .my-bgcolor{
+        background-color: #045300;
+    }
+
+    .my-row{
+        height: 70%;
+    }
+
+    input::placeholder {
+        color: #95989a;
+        opacity: 0.5;
+        font-weight: bold;
+      }
+
+</style>
+{% block main %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="p-5 border bg-secondary-subtle">
+            <div class="row justify-content-center">
+                <div class="col-sm-3">
+                    <div class="p-3">
+                        <img src="https://i.imgur.com/2Ht1s1L.png" class="rounded img-fluid" height="100">
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center align-items-center text-center">
+                <div class="col-sm-4">
+                    <h2>Hi {{username}}! Sign up below to receive texts from Bolic!</h2>
+                </div>
+            </div>
+            <br>
+            <div class="row justify-content-center align-items-center text-center">
+                <div class="col-sm-4">
+                    Message and data rates may apply. Reply STOP to opt-out of receiving texts,
+                    reply HELP for status and more information. Limit 24 msg/day.
+                </div>
+            </div>
+            <br>
+            <div class="row justify-content-center align-items-center text-center">
+                <div class="col-sm-4">
+                    <script>
+
+                        var checkForm = function(form) {
+                          if(!form.terms.checked) {
+                            alert("Please indicate that you accept the Terms and Conditions");
+                            form.terms.focus();
+                            return false;
+                          }
+                          return true;
+                        };
+                      
+                      </script>
+                    <form action="/submit/optin" method="post" onsubmit="return checkForm(this);">
+                        <div class="mb-3">
+                        <input type="tel" class="form-control" id="number" name="number" aria-describedby="emailHelp" placeholder="Please enter in format: xxx-xxx-xxxx" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                        <div id="emailHelp" class="form-text">We'll never share your information with anyone else.</div>
+                        </div>
+                        <div class="mb-3 form-check">
+                        <input type="checkbox" name="terms" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label"><p>I consent to receiving texts and have read the following:</p>
+                            <a href="{{url_for('termsofservice')}}">Terms of Service</a></label>
+                            <a href="{{url_for('privacy')}}">Privacy Policy</a></label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>  
+        </div>
+    </div>
+</div>
+<div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">
+    Example element with utilities
+  </div>
+{% endblock %}
+
+
